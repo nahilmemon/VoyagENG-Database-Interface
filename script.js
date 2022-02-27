@@ -1,62 +1,3 @@
-let maxZoom = 18;
-let minZoom = 1;
-let zoomLevel = 1;
-
-if (window.innerWidth <= 500) {
-    zoomLevel = 1;
-} else {
-    zoomLevel = 2;
-}
-
-var normalm = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
-        maxZoom: maxZoom,
-        minZoom: minZoom
-    }),
-    normala = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
-        maxZoom: maxZoom,
-        minZoom: minZoom
-    }),
-    imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
-        maxZoom: maxZoom,
-        minZoom: minZoom
-    }),
-    imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
-        maxZoom: maxZoom,
-        minZoom: minZoom
-    });
-
-var normal = L.layerGroup([normalm, normala]),
-    image = L.layerGroup([imgm, imga]);
-
-var baseLayers = {
-    "Default": normal,
-    "Terrain": image,
-}
-
-var overlayLayers = {
-
-}
-
-var map = L.map("map", {
-    center: [40, 25],
-    zoom: zoomLevel,
-    layers: [normal],
-    zoomControl: false
-});
-
-// let marker = L.marker([31.59, 120.29]).addTo(map);
-
-L.control.layers(baseLayers, overlayLayers).addTo(map);
-L.control.zoom({
-    zoomInTitle: 'Zoom In',
-    zoomOutTitle: 'Zoom Out'
-}).addTo(map);
-
-let attribution = document.querySelector(".leaflet-control-attribution");
-attribution.innerHTML = '<div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> | Map Data and Imagery © <a href="http://lbs.tianditu.gov.cn/">TianDiTu</a></div>';
-
-// Initialize Firebase
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAjJoBjXhukyCrTUUnHDWlXo6g5SllDGto",
@@ -67,44 +8,68 @@ const firebaseConfig = {
     messagingSenderId: "489914893913",
     appId: "1:489914893913:web:1fcf09322e547ed8401348"
 };
+// Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const dbRef = firebase.database().ref();
-let ref = dbRef.child('cities');
+let dbRefCitiesList = dbRef.child('cities');
 let citiesList = [];
-let markersList = [];
-
-customCityMarker = L.Marker.extend({
-   options: { 
-      cityName: 'unknown'
-   }
-});
-
 // Attach an asynchronous callback to read the data at our posts reference
-ref.on('value', (snapshot) => {
+dbRefCitiesList.on('value', (snapshot) => {
+    // Save the resulting snapshot value from referencing the database's cities node into citiesList
     citiesList = snapshot.val();
-    for (let i=0; i<citiesList.length; i++) {
-        console.log(citiesList[i].latitude, citiesList[i].longitude);
-        markersList[i] = new customCityMarker([citiesList[i].latitude, citiesList[i].longitude], {
-            cityName: citiesList[i].cityName
-        }).addTo(map);
-        console.log(markersList[i]);
-        markersList[i].bindPopup(`<b>${markersList[i].options.cityName}</b>`);
-        markersList[i].on('click', function() { 
-            console.log('Clicked on marker for city:', markersList[i].options.cityName);
-            ThunkableWebviewerExtension.postMessage(markersList[i].options.cityName);
-        });
-    }
+    console.log(citiesList);
 }, (errorObject) => {
     console.log('The read failed: ' + errorObject.name);
 });
 
-var popup = L.popup();
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// Add the email provider ID to the list of FirebaseUI signInOptions.
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: false
+    }
+  ]
+});
 
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-}
+// Initialize the FirebaseUI Widget using Firebase.
+// var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-map.on('click', onMapClick);
+// Specify the FirebaseUI configuration (providers supported and UI customizations as well as success callbacks, etc).
+var uiConfig = {
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      // User successfully signed in.
+      // Return type determines whether we continue the redirect automatically
+      // or whether we leave that to developer to handle.
+      return true;
+    },
+    uiShown: function() {
+      // The widget is rendered.
+      // Hide the loader.
+      document.getElementById('loader').style.display = 'none';
+    }
+  },
+  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+  signInFlow: 'popup',
+  signInSuccessUrl: 'modify-data.html',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  ],
+  // Terms of service url.
+  tosUrl: '<your-tos-url>',
+  // Privacy policy url.
+  privacyPolicyUrl: '<your-privacy-policy-url>'
+};
+
+// Render the FirebaseUI Auth interface:
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);

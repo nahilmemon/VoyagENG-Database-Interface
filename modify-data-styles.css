@@ -1,0 +1,23 @@
+.container {
+  max-width: 960px;
+}
+
+h1 {
+  color: #067a8b;
+}
+
+h2 {
+  color: #067a8b;
+}
+
+h3 {
+  color: #067a8b;
+}
+
+.red {
+  color: red;
+}
+
+.hide {
+  display: none;
+}
