@@ -1,294 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 
-    <title>Modify Data</title>
+	<title>Modify Data</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Firebase UI -->
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="modify-data-styles.css">
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<!-- Firebase UI -->
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="modify-data-styles.css">
 </head>
 <body>
-    <div class="container">
-        <main class="form-signin">
-            <form class="needs-validation" novalidate>
-                <h1 class="mb-3 text-center">Add a New City</h1>
+	<div class="container my-4">
+		<main class="form-signin">
+			<section id="choose-options-section" class="text-center">
+				<h1 class="text-center">Choose An Option</h1>
+				<button class="add-new-city-option-button btn btn-success btn-lg my-4">
+					Add New City
+				</button>
+				<button class="edit-city-option-button btn btn-primary btn-lg my-4 mx-5">
+					Edit City
+				</button>
+				<button class="delete-city-option-button btn btn-danger btn-lg my-4">
+					Delete City
+				</button>
+			</section>
+			<section id="add-new-city-section" class="hide">
+				<form id="add-new-city-form" class="needs-validation" novalidate>
+					<h1 class="mb-3 text-center">Add a New City</h1>
 
-                <!-- Basic City Info -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-2 mb-0 fw-normal">Basic City Info</h2>
-                	<!-- City Name -->
-                    <div class="col-12">
-                        <label for="cityName" class="form-label">City Name</label>
-                        <input type="text" class="form-control" id="cityName" placeholder="e.g. Beijing" value="" required>
-                        <div class="invalid-feedback">
-                            A city name is required.
-                        </div>
-                    </div>
+					<!-- Basic City Info -->
+					<div class="row g-3">
+						<h2 class="h4 mt-2 mb-0 fw-normal">Basic City Info</h2>
+						<!-- City Name -->
+						<div class="col-12">
+							<label for="cityName" class="form-label">City Name</label>
+							<input type="text" class="form-control" id="cityName" placeholder="e.g. Beijing" value="" required>
+							<div class="invalid-feedback">
+								A city name is required.
+							</div>
+						</div>
 
-                    <!-- Country Name -->
-                    <div class="col-12">
-                        <label for="countryName" class="form-label">Country Name</label>
-                        <input type="text" class="form-control" id="countryName" placeholder="e.g. China" value="" required>
-                        <div class="invalid-feedback">
-                            A country name is required.
-                        </div>
-                    </div>
+						<!-- Country Name -->
+						<div class="col-12">
+							<label for="countryName" class="form-label">Country Name</label>
+							<input type="text" class="form-control" id="countryName" placeholder="e.g. China" value="" required>
+							<div class="invalid-feedback">
+								A country name is required.
+							</div>
+						</div>
 
-                    <!-- City Image -->
-                    <div class="col-12">
-                        <label for="cityImage" class="form-label">City Image</label>
-                        <input type="text" class="form-control" id="cityImage" placeholder="???" value="" required>
-                        <div class="invalid-feedback">
-                            Please enter a link to an image of this city.
-                        </div>
-                    </div>
+						<!-- City Image -->
+						<div class="col-12">
+							<label for="cityImage" class="form-label">City Image</label>
+							<input type="text" class="form-control" id="cityImage" placeholder="???" value="" required>
+							<div class="invalid-feedback">
+								Please enter a link to an image of this city.
+							</div>
+						</div>
 
-                    <!-- Latitude -->
-                    <div class="col-12">
-                        <label for="latitude" class="form-label">Latitude</label>
-                        <input type="text" class="form-control" id="latitude" placeholder="e.g. 39.906217" value="" required>
-                        <div class="invalid-feedback">
-                            Please enter the latitude coordinate for this city.
-                        </div>
-                    </div>
+						<!-- Latitude -->
+						<div class="col-12">
+							<label for="latitude" class="form-label">Latitude</label>
+							<input type="text" class="form-control" id="latitude" placeholder="e.g. 39.906217" value="" required>
+							<div class="invalid-feedback">
+								Please enter the latitude coordinate for this city.
+							</div>
+						</div>
 
-                    <!-- Longitude -->
-                    <div class="col-12">
-                        <label for="longitude" class="form-label">Longitude</label>
-                        <input type="text" class="form-control" id="longitude" placeholder="e.g. 116.3912757" value="" required>
-                        <div class="invalid-feedback">
-                            Please enter the longitude coordinate for this city.
-                        </div>
-                    </div>
+						<!-- Longitude -->
+						<div class="col-12">
+							<label for="longitude" class="form-label">Longitude</label>
+							<input type="text" class="form-control" id="longitude" placeholder="e.g. 116.3912757" value="" required>
+							<div class="invalid-feedback">
+								Please enter the longitude coordinate for this city.
+							</div>
+						</div>
 
-                    <!-- Introduction -->
-                    <div class="col-12">
-                        <label for="introduction" class="form-label">Introduction</label>
-                        <textarea class="form-control" id="introduction" placeholder="Please enter a detailed introductory description for this city." value="" required></textarea>
-                        <div class="invalid-feedback">
-                            Please enter a detailed introductory description for this city.
-                        </div>
-                    </div>
-                </div>
+						<!-- Introduction -->
+						<div class="col-12">
+							<label for="introduction" class="form-label">Introduction</label>
+							<textarea class="form-control" id="introduction" placeholder="Please enter a detailed introductory description for this city." value="" required></textarea>
+							<div class="invalid-feedback">
+								Please enter a detailed introductory description for this city.
+							</div>
+						</div>
+					</div>
 
-                <!-- Button Text Color -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Button Text Color (RGB Values)</h2>
-                	<div class="col-4">
-                        <label for="redButtonTextColor" class="form-label">Red Value</label>
-                        <input type="text" class="form-control" id="redButtonTextColor" placeholder="Scale of 0-255" required>
-                        <div class="invalid-feedback">
-                            Please enter the red value on a scale of 0 to 255.
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="greenButtonTextColor" class="form-label">Green Value</label>
-                        <input type="text" class="form-control" id="greenButtonTextColor" placeholder="Scale of 0-255" required>
-                        <div class="invalid-feedback">
-                            Please enter the green value on a scale of 0 to 255.
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="blueButtonTextColor" class="form-label">Blue Value</label>
-                        <input type="text" class="form-control" id="blueButtonTextColor" placeholder="Scale of 0-255" required>
-                        <div class="invalid-feedback">
-                            Please enter the blue value on a scale of 0 to 255.
-                        </div>
-                    </div>
-                </div>
+					<!-- Button Text Color -->
+					<div class="row g-3">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Button Text Color (RGB Values)</h2>
+						<div class="col-4">
+							<label for="redButtonTextColor" class="form-label">Red Value</label>
+							<input type="text" class="form-control" id="redButtonTextColor" placeholder="Scale of 0-255" required>
+							<div class="invalid-feedback">
+								Please enter the red value on a scale of 0 to 255.
+							</div>
+						</div>
+						<div class="col-4">
+							<label for="greenButtonTextColor" class="form-label">Green Value</label>
+							<input type="text" class="form-control" id="greenButtonTextColor" placeholder="Scale of 0-255" required>
+							<div class="invalid-feedback">
+								Please enter the green value on a scale of 0 to 255.
+							</div>
+						</div>
+						<div class="col-4">
+							<label for="blueButtonTextColor" class="form-label">Blue Value</label>
+							<input type="text" class="form-control" id="blueButtonTextColor" placeholder="Scale of 0-255" required>
+							<div class="invalid-feedback">
+								Please enter the blue value on a scale of 0 to 255.
+							</div>
+						</div>
+					</div>
 
-                <!-- Button Background Color -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Button Background Color (RGB Values)</h2>
-                	<div class="col-4">
-                        <label for="redButtonBackgroundColor" class="form-label">Red Value</label>
-                        <input type="text" class="form-control" id="redButtonBackgroundColor" placeholder="Scale of 0-255" required>
-                        <div class="invalid-feedback">
-                            Please enter the red value on a scale of 0 to 255.
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="greenButtonBackgroundColor" class="form-label">Green Value</label>
-                        <input type="text" class="form-control" id="greenButtonBackgroundColor" placeholder="Scale of 0-255" required>
-                        <div class="invalid-feedback">
-                            Please enter the green value on a scale of 0 to 255.
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="blueButtonBackgroundColor" class="form-label">Blue Value</label>
-                        <input type="text" class="form-control" id="blueButtonBackgroundColor" placeholder="Scale of 0-255" required>
-                        <div class="invalid-feedback">
-                            Please enter the blue value on a scale of 0 to 255.
-                        </div>
-                    </div>
-                </div>
+					<!-- Button Background Color -->
+					<div class="row g-3">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Button Background Color (RGB Values)</h2>
+						<div class="col-4">
+							<label for="redButtonBackgroundColor" class="form-label">Red Value</label>
+							<input type="text" class="form-control" id="redButtonBackgroundColor" placeholder="Scale of 0-255" required>
+							<div class="invalid-feedback">
+								Please enter the red value on a scale of 0 to 255.
+							</div>
+						</div>
+						<div class="col-4">
+							<label for="greenButtonBackgroundColor" class="form-label">Green Value</label>
+							<input type="text" class="form-control" id="greenButtonBackgroundColor" placeholder="Scale of 0-255" required>
+							<div class="invalid-feedback">
+								Please enter the green value on a scale of 0 to 255.
+							</div>
+						</div>
+						<div class="col-4">
+							<label for="blueButtonBackgroundColor" class="form-label">Blue Value</label>
+							<input type="text" class="form-control" id="blueButtonBackgroundColor" placeholder="Scale of 0-255" required>
+							<div class="invalid-feedback">
+								Please enter the blue value on a scale of 0 to 255.
+							</div>
+						</div>
+					</div>
 
-                <!-- Langugage Components -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Languages for Various Language Components</h2>
-                	<!-- Speech Recognizer -->
-                	<div class="col-12">
-                        <label for="speechRecognizerLanguage" class="form-label">Speech Recognizer Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
-                        <input type="text" class="form-control" id="speechRecognizerLanguage" placeholder="e.g. CHINESE_CHINA" required>
-                        <div class="invalid-feedback">
-                            Please enter the language needed for using the speech recognizer component.
-                        </div>
-                    </div>
+					<!-- Langugage Components -->
+					<div class="row g-3">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Languages for Various Language Components</h2>
+						<!-- Speech Recognizer -->
+						<div class="col-12">
+							<label for="speechRecognizerLanguage" class="form-label">Speech Recognizer Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
+							<input type="text" class="form-control" id="speechRecognizerLanguage" placeholder="e.g. CHINESE_CHINA" required>
+							<div class="invalid-feedback">
+								Please enter the language needed for using the speech recognizer component.
+							</div>
+						</div>
 
-                    <!-- Text to Speech Language -->
-                	<div class="col-12">
-                        <label for="textToSpeechLanguage" class="form-label">Text to Speech Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
-                        <input type="text" class="form-control" id="textToSpeechLanguage" placeholder="e.g. CHINESE_CHINA" required>
-                        <div class="invalid-feedback">
-                            Please enter the language needed for using the text to speech component.
-                        </div>
-                    </div>
+						<!-- Text to Speech Language -->
+						<div class="col-12">
+							<label for="textToSpeechLanguage" class="form-label">Text to Speech Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
+							<input type="text" class="form-control" id="textToSpeechLanguage" placeholder="e.g. CHINESE_CHINA" required>
+							<div class="invalid-feedback">
+								Please enter the language needed for using the text to speech component.
+							</div>
+						</div>
 
-                    <!-- Translator Language -->
-                	<div class="col-12">
-                        <label for="translatorLanguage" class="form-label">Translator Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
-                        <input type="text" class="form-control" id="translatorLanguage" placeholder="e.g. CHINESE" required>
-                        <div class="invalid-feedback">
-                            Please enter the language needed for using the translator component.
-                        </div>
-                    </div>
-                </div>
+						<!-- Translator Language -->
+						<div class="col-12">
+							<label for="translatorLanguage" class="form-label">Translator Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
+							<input type="text" class="form-control" id="translatorLanguage" placeholder="e.g. CHINESE" required>
+							<div class="invalid-feedback">
+								Please enter the language needed for using the translator component.
+							</div>
+						</div>
+					</div>
 
-                <!-- Image Finding Game -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Image Finding Game</h2>
-                	<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
-                	<p class="red mb-0">Example: pie,apple,yo yo</p>
-                	<!-- List of Objects to Take Photos of -->
-                	<div class="col-12">
-                        <label for="listOfImagesToFind" class="form-label">List of Objects to Take Photos of</label>
-                        <input type="text" class="form-control" id="listOfImagesToFind" placeholder="e.g. pie,apple,yo yo" required>
-                        <div class="invalid-feedback">
-                            Please enter a comma separated list of images to find.
-                        </div>
-                    </div>
-                </div>
+					<!-- Image Finding Game -->
+					<div class="row g-3">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Image Finding Game</h2>
+						<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+						<p class="red mb-0">Example: pie,apple,yo yo</p>
+						<!-- List of Objects to Take Photos of -->
+						<div class="col-12">
+							<label for="listOfImagesToFind" class="form-label">List of Objects to Take Photos of</label>
+							<input type="text" class="form-control" id="listOfImagesToFind" placeholder="e.g. pie,apple,yo yo" required>
+							<div class="invalid-feedback">
+								Please enter a comma separated list of images to find.
+							</div>
+						</div>
+					</div>
 
-                <!-- Pronunciation Game -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Pronunciation Game</h2>
-                	<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
-                	<p class="red mb-0">IMPORTANT: DON'T use capital letters or punctuation within a phrase.</p>
-                	<p class="red mb-0">Example: pie,apple,yo yo</p>
-                	<!-- List of Words/Phrases to Pronounce -->
-                	<div class="col-12">
-                        <label for="listOfPronunciationGamePhrases" class="form-label">List of Words/Phrases to Pronounce</label>
-                        <input type="text" class="form-control" id="listOfPronunciationGamePhrases" placeholder="e.g. pie,apple,yo yo" required>
-                        <div class="invalid-feedback">
-                            Please enter a comma separated list of words/phrases to pronounce.
-                        </div>
-                    </div>
-                </div>
+					<!-- Pronunciation Game -->
+					<div class="row g-3">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Pronunciation Game</h2>
+						<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+						<p class="red mb-0">IMPORTANT: DON'T use capital letters or punctuation within a phrase.</p>
+						<p class="red mb-0">Example: pie,apple,yo yo</p>
+						<!-- List of Words/Phrases to Pronounce -->
+						<div class="col-12">
+							<label for="listOfPronunciationGamePhrases" class="form-label">List of Words/Phrases to Pronounce</label>
+							<input type="text" class="form-control" id="listOfPronunciationGamePhrases" placeholder="e.g. pie,apple,yo yo" required>
+							<div class="invalid-feedback">
+								Please enter a comma separated list of words/phrases to pronounce.
+							</div>
+						</div>
+					</div>
 
-                <!-- Spaceship Game -->
-                <div class="row g-3">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Spaceship Game</h2>
-                	<!-- Alphabet List -->
-                	<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
-                	<p class="red mb-0">Example: a,b,c,d,e</p>
-                	<div class="col-12">
-                        <label for="alphabetList" class="form-label">Letters of the Alphabet List</label>
-                        <input type="text" class="form-control" id="alphabetList" placeholder="e.g. a,b,c,d,e" required>
-                        <div class="invalid-feedback">
-                            Please enter a comma separated list of the letters of the alphabet.
-                        </div>
-                    </div>
-                    <!-- Reading Direction -->
-                    <p class="red mb-0">IMPORTANT: This should be either ltr (left to right) or rtl (right to left)</p>
-                	<div class="col-12">
-                        <label for="direction" class="form-label">Reading Direction</label>
-                        <input type="text" class="form-control" id="direction" placeholder="ltr OR rtl" required>
-                        <div class="invalid-feedback">
-                            Please enter either ltr or rtl.
-                        </div>
-                    </div>
-                    <!-- Words to Guess -->
-                    <p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
-                    <p class="red mb-0">There should not be any spaces between the words.</p>
-                	<p class="red mb-0">Example: happy,cold,snowflake</p>
-                	<div class="col-12">
-                        <label for="wordsToGuessList" class="form-label">List of Words to Guess</label>
-                        <input type="text" class="form-control" id="wordsToGuessList" placeholder="e.g. happy,cold,snowflake" required>
-                        <div class="invalid-feedback">
-                            Please enter a comma separated list of words to guess.
-                        </div>
-                    </div>
-                </div>
+					<!-- Spaceship Game -->
+					<div class="row g-3">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Spaceship Game</h2>
+						<!-- Alphabet List -->
+						<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+						<p class="red mb-0">Example: a,b,c,d,e</p>
+						<div class="col-12">
+							<label for="alphabetList" class="form-label">Letters of the Alphabet List</label>
+							<input type="text" class="form-control" id="alphabetList" placeholder="e.g. a,b,c,d,e" required>
+							<div class="invalid-feedback">
+								Please enter a comma separated list of the letters of the alphabet.
+							</div>
+						</div>
+						<!-- Reading Direction -->
+						<p class="red mb-0">IMPORTANT: This should be either ltr (left to right) or rtl (right to left)</p>
+						<div class="col-12">
+							<label for="direction" class="form-label">Reading Direction</label>
+							<input type="text" class="form-control" id="direction" placeholder="ltr OR rtl" required>
+							<div class="invalid-feedback">
+								Please enter either ltr or rtl.
+							</div>
+						</div>
+						<!-- Words to Guess -->
+						<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+						<p class="red mb-0">There should not be any spaces between the words.</p>
+						<p class="red mb-0">Example: happy,cold,snowflake</p>
+						<div class="col-12">
+							<label for="wordsToGuessList" class="form-label">List of Words to Guess</label>
+							<input type="text" class="form-control" id="wordsToGuessList" placeholder="e.g. happy,cold,snowflake" required>
+							<div class="invalid-feedback">
+								Please enter a comma separated list of words to guess.
+							</div>
+						</div>
+					</div>
 
-                <!-- Famous Places -->
-                <div class="row g-3 famousPlaces">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Famous Places</h2>
+					<!-- Famous Places -->
+					<div class="row g-3 famousPlaces">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Famous Places</h2>
 
-                	<!-- How Many Places -->
-                	<div class="col-12 numberOfFamousPlacesDiv">
-                        <label for="numberOfFamousPlaces" class="form-label">How many famous places do you want?</label>
-                        <input type="number" class="form-control" id="numberOfFamousPlaces" placeholder="" min="3" value="3" required>
-                        <div class="invalid-feedback">
-                            Please enter the number of famous places you would like.
-                        </div>
+						<!-- How Many Places -->
+						<div class="col-12 numberOfFamousPlacesDiv">
+							<label for="numberOfFamousPlaces" class="form-label">How many famous places do you want?</label>
+							<input type="number" class="form-control" id="numberOfFamousPlaces" placeholder="" min="3" value="3" required>
+							<div class="invalid-feedback">
+								Please enter the number of famous places you would like.
+							</div>
 
-                        <button id="addFamousPlacesButton" class="w-100 btn btn-primary btn-lg my-4" type="button">Generate Famous Places Fields</button>
-                    </div>
-                </div>
+							<button id="addFamousPlacesButton" class="w-100 btn btn-primary btn-lg my-4" type="button">Generate Famous Places Fields</button>
+						</div>
+					</div>
 
-                <!-- Famous Food -->
-                <div class="row g-3 famousFood">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Famous Food</h2>
+					<!-- Famous Food -->
+					<div class="row g-3 famousFood">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Famous Food</h2>
 
-                	<!-- How Many Food -->
-                	<div class="col-12 numberOfFamousFoodDiv">
-                        <label for="numberOfFamousFood" class="form-label">How many famous foods do you want?</label>
-                        <input type="number" class="form-control" id="numberOfFamousFood" placeholder="" min="3" value="3" required>
-                        <div class="invalid-feedback">
-                            Please enter the number of famous food you would like.
-                        </div>
+						<!-- How Many Food -->
+						<div class="col-12 numberOfFamousFoodDiv">
+							<label for="numberOfFamousFood" class="form-label">How many famous foods do you want?</label>
+							<input type="number" class="form-control" id="numberOfFamousFood" placeholder="" min="3" value="3" required>
+							<div class="invalid-feedback">
+								Please enter the number of famous food you would like.
+							</div>
 
-                        <button id="addFamousFoodButton" class="w-100 btn btn-primary btn-lg my-4" type="button">Generate Famous Foods Fields</button>
-                    </div>
-                </div>
+							<button id="addFamousFoodButton" class="w-100 btn btn-primary btn-lg my-4" type="button">Generate Famous Foods Fields</button>
+						</div>
+					</div>
 
-                <!-- List of Common Phrases -->
-                <div class="row g-3 commonPhrases">
-                	<h2 class="h4 mt-5 mb-0 fw-normal">Common Phrases</h2>
+					<!-- List of Common Phrases -->
+					<div class="row g-3 commonPhrases">
+						<h2 class="h4 mt-5 mb-0 fw-normal">Common Phrases</h2>
 
-                	<!-- How Many Phrases -->
-                	<div class="col-12 numberOfCommonPhrasesDiv">
-                        <label for="numberOfFamousFood" class="form-label">How many common phrases do you want?</label>
-                        <input type="number" class="form-control" id="numberOfCommonPhrases" placeholder="" min="3" value="3" required>
-                        <div class="invalid-feedback">
-                            Please enter the number of common phrases you would like.
-                        </div>
+						<!-- How Many Phrases -->
+						<div class="col-12 numberOfCommonPhrasesDiv">
+							<label for="numberOfFamousFood" class="form-label">How many common phrases do you want?</label>
+							<input type="number" class="form-control" id="numberOfCommonPhrases" placeholder="" min="3" value="3" required>
+							<div class="invalid-feedback">
+								Please enter the number of common phrases you would like.
+							</div>
 
-                        <button id="addCommonPhrasesButton" class="w-100 btn btn-primary btn-lg my-4" type="button">Generate Common Phrases Fields</button>
-                    </div>
-                </div>
+							<button id="addCommonPhrasesButton" class="w-100 btn btn-primary btn-lg my-4" type="button">Generate Common Phrases Fields</button>
+						</div>
+					</div>
 
-                <button id="addCityButton" class="w-100 btn btn-success btn-lg my-4" type="submit">Add City</button>
-            </form>
-        </main>
-    </div>
+					<button id="addCityButton" class="w-100 btn btn-success btn-lg my-4" type="submit">Add City</button>
+				</form>
+			</section>
+			<section id="edit-city-section" class="hide">
+				<h1 class="text-center">Edit a City</h1>
+				<div class="choose-city-to-edit">
+					<p class="text-center fs-3">First choose a city to edit:</p>
+					<div id="list-of-cities-to-edit">
+					</div>
+					<button class="choose-city-to-edit-button btn btn-primary btn-lg my-4 w-100">
+						Edit Selected City
+					</button>
+				</div>
+				<div class="edit-city-form hide">
+					<form id="edit-city-form" class="needs-validation" novalidate>
+						<!-- Basic City Info -->
+						<div class="row g-3">
+							<h2 class="h4 mt-2 mb-0 fw-normal">Basic City Info</h2>
+							<!-- City Name -->
+							<div class="col-12">
+								<label for="cityName2" class="form-label">City Name</label>
+								<input type="text" class="form-control" id="cityName2" placeholder="e.g. Beijing" value="" required>
+								<div class="invalid-feedback">
+									A city name is required.
+								</div>
+							</div>
 
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <!-- Firebase UI -->
-    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
-    <!-- Custom JS -->
-    <script type="text/javascript" src="modify-data.js"></script>
-    <script type="text/javascript" src="form-validation.js"></script>
+							<!-- Country Name -->
+							<div class="col-12">
+								<label for="countryName2" class="form-label">Country Name</label>
+								<input type="text" class="form-control" id="countryName2" placeholder="e.g. China" value="" required>
+								<div class="invalid-feedback">
+									A country name is required.
+								</div>
+							</div>
+
+							<!-- City Image -->
+							<div class="col-12">
+								<label for="cityImage2" class="form-label">City Image</label>
+								<input type="text" class="form-control" id="cityImage2" placeholder="???" value="" required>
+								<div class="invalid-feedback">
+									Please enter a link to an image of this city.
+								</div>
+							</div>
+
+							<!-- Latitude -->
+							<div class="col-12">
+								<label for="latitude2" class="form-label">Latitude</label>
+								<input type="text" class="form-control" id="latitude2" placeholder="e.g. 39.906217" value="" required>
+								<div class="invalid-feedback">
+									Please enter the latitude coordinate for this city.
+								</div>
+							</div>
+
+							<!-- Longitude -->
+							<div class="col-12">
+								<label for="longitude2" class="form-label">Longitude</label>
+								<input type="text" class="form-control" id="longitude2" placeholder="e.g. 116.3912757" value="" required>
+								<div class="invalid-feedback">
+									Please enter the longitude coordinate for this city.
+								</div>
+							</div>
+
+							<!-- Introduction -->
+							<div class="col-12">
+								<label for="introduction2" class="form-label">Introduction</label>
+								<textarea class="form-control" id="introduction2" placeholder="Please enter a detailed introductory description for this city." value="" required></textarea>
+								<div class="invalid-feedback">
+									Please enter a detailed introductory description for this city.
+								</div>
+							</div>
+						</div>
+
+						<!-- Button Text Color -->
+						<div class="row g-3">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Button Text Color (RGB Values)</h2>
+							<div class="col-4">
+								<label for="redButtonTextColor2" class="form-label">Red Value</label>
+								<input type="text" class="form-control" id="redButtonTextColor2" placeholder="Scale of 0-255" required>
+								<div class="invalid-feedback">
+									Please enter the red value on a scale of 0 to 255.
+								</div>
+							</div>
+							<div class="col-4">
+								<label for="greenButtonTextColor2" class="form-label">Green Value</label>
+								<input type="text" class="form-control" id="greenButtonTextColor2" placeholder="Scale of 0-255" required>
+								<div class="invalid-feedback">
+									Please enter the green value on a scale of 0 to 255.
+								</div>
+							</div>
+							<div class="col-4">
+								<label for="blueButtonTextColor2" class="form-label">Blue Value</label>
+								<input type="text" class="form-control" id="blueButtonTextColor2" placeholder="Scale of 0-255" required>
+								<div class="invalid-feedback">
+									Please enter the blue value on a scale of 0 to 255.
+								</div>
+							</div>
+						</div>
+
+						<!-- Button Background Color -->
+						<div class="row g-3">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Button Background Color (RGB Values)</h2>
+							<div class="col-4">
+								<label for="redButtonBackgroundColor2" class="form-label">Red Value</label>
+								<input type="text" class="form-control" id="redButtonBackgroundColor2" placeholder="Scale of 0-255" required>
+								<div class="invalid-feedback">
+									Please enter the red value on a scale of 0 to 255.
+								</div>
+							</div>
+							<div class="col-4">
+								<label for="greenButtonBackgroundColor2" class="form-label">Green Value</label>
+								<input type="text" class="form-control" id="greenButtonBackgroundColor2" placeholder="Scale of 0-255" required>
+								<div class="invalid-feedback">
+									Please enter the green value on a scale of 0 to 255.
+								</div>
+							</div>
+							<div class="col-4">
+								<label for="blueButtonBackgroundColor2" class="form-label">Blue Value</label>
+								<input type="text" class="form-control" id="blueButtonBackgroundColor2" placeholder="Scale of 0-255" required>
+								<div class="invalid-feedback">
+									Please enter the blue value on a scale of 0 to 255.
+								</div>
+							</div>
+						</div>
+
+						<!-- Langugage Components -->
+						<div class="row g-3">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Languages for Various Language Components</h2>
+							<!-- Speech Recognizer -->
+							<div class="col-12">
+								<label for="speechRecognizerLanguage2" class="form-label">Speech Recognizer Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
+								<input type="text" class="form-control" id="speechRecognizerLanguage2" placeholder="e.g. CHINESE_CHINA" required>
+								<div class="invalid-feedback">
+									Please enter the language needed for using the speech recognizer component.
+								</div>
+							</div>
+
+							<!-- Text to Speech Language -->
+							<div class="col-12">
+								<label for="textToSpeechLanguage2" class="form-label">Text to Speech Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
+								<input type="text" class="form-control" id="textToSpeechLanguage2" placeholder="e.g. CHINESE_CHINA" required>
+								<div class="invalid-feedback">
+									Please enter the language needed for using the text to speech component.
+								</div>
+							</div>
+
+							<!-- Translator Language -->
+							<div class="col-12">
+								<label for="translatorLanguage2" class="form-label">Translator Language <span class="text-muted">(Hint: Check the component's dropdown.)</span></label>
+								<input type="text" class="form-control" id="translatorLanguage2" placeholder="e.g. CHINESE" required>
+								<div class="invalid-feedback">
+									Please enter the language needed for using the translator component.
+								</div>
+							</div>
+						</div>
+
+						<!-- Image Finding Game -->
+						<div class="row g-3">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Image Finding Game</h2>
+							<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+							<p class="red mb-0">Example: pie,apple,yo yo</p>
+							<!-- List of Objects to Take Photos of -->
+							<div class="col-12">
+								<label for="listOfImagesToFind2" class="form-label">List of Objects to Take Photos of</label>
+								<input type="text" class="form-control" id="listOfImagesToFind2" placeholder="e.g. pie,apple,yo yo" required>
+								<div class="invalid-feedback">
+									Please enter a comma separated list of images to find.
+								</div>
+							</div>
+						</div>
+
+						<!-- Pronunciation Game -->
+						<div class="row g-3">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Pronunciation Game</h2>
+							<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+							<p class="red mb-0">IMPORTANT: DON'T use capital letters or punctuation within a phrase.</p>
+							<p class="red mb-0">Example: pie,apple,yo yo</p>
+							<!-- List of Words/Phrases to Pronounce -->
+							<div class="col-12">
+								<label for="listOfPronunciationGamePhrases2" class="form-label">List of Words/Phrases to Pronounce</label>
+								<input type="text" class="form-control" id="listOfPronunciationGamePhrases2" placeholder="e.g. pie,apple,yo yo" required>
+								<div class="invalid-feedback">
+									Please enter a comma separated list of words/phrases to pronounce.
+								</div>
+							</div>
+						</div>
+
+						<!-- Spaceship Game -->
+						<div class="row g-3">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Spaceship Game</h2>
+							<!-- Alphabet List -->
+							<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+							<p class="red mb-0">Example: a,b,c,d,e</p>
+							<div class="col-12">
+								<label for="alphabetList2" class="form-label">Letters of the Alphabet List</label>
+								<input type="text" class="form-control" id="alphabetList2" placeholder="e.g. a,b,c,d,e" required>
+								<div class="invalid-feedback">
+									Please enter a comma separated list of the letters of the alphabet.
+								</div>
+							</div>
+							<!-- Reading Direction -->
+							<p class="red mb-0">IMPORTANT: This should be either ltr (left to right) or rtl (right to left)</p>
+							<div class="col-12">
+								<label for="direction2" class="form-label">Reading Direction</label>
+								<input type="text" class="form-control" id="direction2" placeholder="ltr OR rtl" required>
+								<div class="invalid-feedback">
+									Please enter either ltr or rtl.
+								</div>
+							</div>
+							<!-- Words to Guess -->
+							<p class="red mb-0">IMPORTANT: Separate each item with a comma and DON'T put spaces in between items.</p>
+							<p class="red mb-0">There should not be any spaces between the words.</p>
+							<p class="red mb-0">Example: happy,cold,snowflake</p>
+							<div class="col-12">
+								<label for="wordsToGuessList2" class="form-label">List of Words to Guess</label>
+								<input type="text" class="form-control" id="wordsToGuessList2" placeholder="e.g. happy,cold,snowflake" required>
+								<div class="invalid-feedback">
+									Please enter a comma separated list of words to guess.
+								</div>
+							</div>
+						</div>
+
+						<!-- Famous Places -->
+						<div class="row g-3 famousPlaces2">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Famous Places</h2>
+						</div>
+
+						<!-- Famous Food -->
+						<div class="row g-3 famousFood2">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Famous Food</h2>
+						</div>
+
+						<!-- List of Common Phrases -->
+						<div class="row g-3 commonPhrases2">
+							<h2 class="h4 mt-5 mb-0 fw-normal">Common Phrases</h2>
+						</div>
+
+						<button id="edit-selected-city-button" class="w-100 btn btn-primary btn-lg my-4" type="submit">Edit Selected City</button>
+					</form>
+				</div>
+			</section>
+			<section id="delete-city-section" class="hide">
+				<h1 class="text-center">Delete a City</h1>
+				<div id="list-of-cities-to-delete">
+				</div>
+				<button class="delete-city-button btn btn-danger btn-lg my-4 w-100">
+					Delete Selected City
+				</button>
+			</section> 
+		</main>
+	</div>
+
+	<!-- Bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+	<!-- Firebase UI -->
+	<script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+	<!-- Custom JS -->
+	<script type="text/javascript" src="modify-data.js"></script>
+	<script type="text/javascript" src="form-validation.js"></script>
 </body>
 </html>
