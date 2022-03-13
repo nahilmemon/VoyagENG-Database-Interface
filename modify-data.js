@@ -252,8 +252,8 @@
 		cityToAdd["listOfPronunciationGamePhrases"] = document.querySelector("#listOfPronunciationGamePhrases").value.split(",");
 		cityToAdd["spaceshipGame"] = {
 			"direction": document.querySelector("#direction").value,
-			"alphabetList": document.querySelector("#alphabetList").value,
-			"wordsToGuessList": document.querySelector("#wordsToGuessList").value
+			"alphabetList": document.querySelector("#alphabetList").value.split(","),
+			"wordsToGuessList": document.querySelector("#wordsToGuessList").value.split(",")
 		};
 
 		let listOfFamousPlaces = [];
@@ -543,8 +543,8 @@ editSelectedButton.addEventListener("click", function(event) {
 	
 	citiesListObject[selectedCityToEditIndex]["spaceshipGame"] = {
 		"direction": document.querySelector("#direction2").value,
-		"alphabetList": document.querySelector("#alphabetList2").value,
-		"wordsToGuessList": document.querySelector("#wordsToGuessList2").value
+		"alphabetList": document.querySelector("#alphabetList2").value.split(","),
+		"wordsToGuessList": document.querySelector("#wordsToGuessList2").value.split(",")
 	};
 
 	let listOfFamousPlaces = [];
